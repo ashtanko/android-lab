@@ -13,12 +13,14 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = ("kotlin-base-skeleton")
+rootProject.name = ("android-lab")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
     "app",
     "library-android",
-    "library-kotlin"
+    "library-kotlin",
+    "ipc:ipc-client",
+    "ipc:ipc-server",
 )
