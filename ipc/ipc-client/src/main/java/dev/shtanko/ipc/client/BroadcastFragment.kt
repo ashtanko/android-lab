@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-package dev.shtanko.ipc.server
+package dev.shtanko.ipc.client
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import dev.shtanko.ipc.server.databinding.ActivityMainBinding
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import dev.shtanko.ipc.client.databinding.FragmentBroadcastBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class BroadcastFragment : Fragment() {
+    private lateinit var binding: FragmentBroadcastBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentBroadcastBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }

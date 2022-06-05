@@ -1,5 +1,5 @@
 // IMyAidlInterface.aidl
-package dev.shtanko.icp.client;
+package dev.shtanko.ipc.client;
 
 // Declare any non-default types here with import statements
 

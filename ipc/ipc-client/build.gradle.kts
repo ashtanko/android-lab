@@ -45,6 +45,10 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraint.layout)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.navigation.ui)
+    implementation(libs.androidx.navigation.fragment)
+
+    implementation("com.google.android.material:material:1.6.1")
 
     testImplementation(libs.junit)
 
