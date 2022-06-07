@@ -28,12 +28,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         ActivityMainBinding.inflate(layoutInflater).apply {
-            navController = (supportFragmentManager
-                .findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
-                .navController
+            navController = (navHostFragment).navController
             navView.setupWithNavController(navController)
-
             setContentView(root)
         }
     }

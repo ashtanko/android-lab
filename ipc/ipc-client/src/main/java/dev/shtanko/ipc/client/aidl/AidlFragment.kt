@@ -103,7 +103,6 @@ class AidlFragment : Fragment(), ServiceConnection {
 
         binding.toolbar.applyNavigationIcon(connected)
         binding.card.goneUnless(connected)
-
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
