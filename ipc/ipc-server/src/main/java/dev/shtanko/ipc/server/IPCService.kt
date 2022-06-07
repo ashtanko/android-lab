@@ -63,7 +63,6 @@ class IPCService : LifecycleService() {
             super.handleMessage(msg)
             val receivedBundle = msg.data
 
-
             mClientData.postValue(
                 Data(
                     receivedBundle.getString(PACKAGE_NAME) ?: NOT_SENT,
