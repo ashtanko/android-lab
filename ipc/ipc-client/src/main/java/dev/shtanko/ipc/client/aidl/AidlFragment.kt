@@ -115,7 +115,7 @@ class AidlFragment : Fragment(), ServiceConnection {
     }
 
     private fun connectToRemoteServer() {
-        val intent = Intent(IPCMethod.AIDL.desc)
+        val intent = Intent(IPCMethod.AIDL_METHOD.desc)
         val pack = IIPCExample::class.java.`package`
         pack?.let {
             intent.setPackage(pack.name)

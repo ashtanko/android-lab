@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 textViewPackage.text =
                     applyFormattedString(R.string.package_format, it.clientPackageName)
                 textViewProcessId.text =
-                    applyFormattedString(R.string.package_format, it.clientProcessId)
+                    applyFormattedString(R.string.process_id_format, it.clientProcessId)
             }
         }
     }
