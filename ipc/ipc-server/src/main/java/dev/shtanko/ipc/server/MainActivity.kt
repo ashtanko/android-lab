@@ -18,6 +18,7 @@ package dev.shtanko.ipc.server
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import dev.shtanko.ipc.common.applyFormattedString
 import dev.shtanko.ipc.server.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -27,5 +28,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        IPCService.clientData.observe(this) {
+            binding.apply {
+                textViewData.text = applyFormattedString(R.string.data_format, it.clientData)
+                textViewIpcMethod.text =
+                    applyFormattedString(R.string.ipc_method_format, it.ipcMethod)
+                textViewPackage.text =
+                    applyFormattedString(R.string.package_format, it.clientPackageName)
+                textViewProcessId.text =
+                    applyFormattedString(R.string.package_format, it.clientProcessId)
+            }
+        }
     }
 }

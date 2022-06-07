@@ -29,11 +29,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ActivityMainBinding.inflate(layoutInflater).apply {
-            setContentView(root)
             navController = (supportFragmentManager
                 .findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
                 .navController
             navView.setupWithNavController(navController)
+
+            setContentView(root)
         }
     }
 }

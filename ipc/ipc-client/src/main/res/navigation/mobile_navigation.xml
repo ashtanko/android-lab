@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_aidl"
-        android:name="dev.shtanko.ipc.client.AidlFragment"
+        android:name="dev.shtanko.ipc.client.aidl.AidlFragment"
         android:label="@string/title_aidl"
         tools:layout="@layout/fragment_aidl" />
 

@@ -5,4 +5,8 @@
     <string name="title_messenger">Messenger</string>
     <string name="title_broadcast">Broadcast</string>
     <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="send_data_hint">Send data to the server</string>
+    <string name="process_id_title">Process ID: %s</string>
+    <string name="connection_count_title">Connection count: %s</string>
 </resources>

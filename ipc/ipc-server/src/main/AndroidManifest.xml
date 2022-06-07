@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dev.shtanko.ipc.server">
 
+    <queries>
+        <package android:name="dev.shtanko.ipc.server" />
+    </queries>
+
+    <permission
+        android:name="dev.shtanko.ipc.server.PERMISSION"
+        android:permissionGroup="android.permission-group.UNDEFINED"
+        android:protectionLevel="normal" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+
         <activity
             android:name="dev.shtanko.ipc.server.MainActivity"
             android:exported="true">
@@ -20,6 +30,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".IPCService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="dev.shtanko.ipc.server.PERMISSION">
+            <intent-filter>
+                <action android:name="aidl_method" />
+                <action android:name="messenger_method" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

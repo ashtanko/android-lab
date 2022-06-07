@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dev.shtanko.ipc.client">
 
+    <uses-permission android:name="dev.shtanko.ipc.server.PERMISSION" />
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+
+    <queries>
+        <package android:name="dev.shtanko.ipc.server" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

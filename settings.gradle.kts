@@ -23,4 +23,5 @@ include(
     "library-kotlin",
     "ipc:ipc-client",
     "ipc:ipc-server",
+    "ipc:ipc-common",
 )
