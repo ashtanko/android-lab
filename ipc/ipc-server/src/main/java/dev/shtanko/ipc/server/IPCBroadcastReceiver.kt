@@ -24,17 +24,9 @@ import dev.shtanko.ipc.common.IPCMethod
 import dev.shtanko.ipc.common.METHOD
 import dev.shtanko.ipc.common.PACKAGE_NAME
 import dev.shtanko.ipc.common.PID
-import timber.log.Timber
 
 class IPCBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        Timber.d(
-            "${intent?.getStringExtra(PACKAGE_NAME)} ${intent?.getStringExtra(PID)} ${
-                intent?.getStringExtra(
-                    DATA
-                )
-            }"
-        )
         val local = Intent().apply {
             action = PASS_TO_ACTIVITY_ACTION
             putExtra(PACKAGE_NAME, intent?.getStringExtra(PACKAGE_NAME))

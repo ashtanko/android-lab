@@ -48,23 +48,26 @@ class MainActivity : AppCompatActivity() {
         val intentFilter = IntentFilter().apply {
             addAction(PASS_TO_ACTIVITY_ACTION)
         }
-        registerReceiver(object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                Timber.d(
-                    "${intent?.getStringExtra(PACKAGE_NAME)} " +
-                        "${intent?.getStringExtra(PID)} " +
-                        "${intent?.getStringExtra(DATA)}" +
-                        "${intent?.getStringExtra(METHOD)}"
-                )
-                applyData(
-                    intent?.getStringExtra(DATA),
-                    intent?.getStringExtra(METHOD),
-                    intent?.getStringExtra(PACKAGE_NAME),
-                    intent?.getStringExtra(PID)
-                )
-                applyStatus(true)
-            }
-        }, intentFilter)
+        registerReceiver(
+            object : BroadcastReceiver() {
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    Timber.d(
+                        "${intent?.getStringExtra(PACKAGE_NAME)} " +
+                            "${intent?.getStringExtra(PID)} " +
+                            "${intent?.getStringExtra(DATA)}" +
+                            "${intent?.getStringExtra(METHOD)}"
+                    )
+                    applyData(
+                        intent?.getStringExtra(DATA),
+                        intent?.getStringExtra(METHOD),
+                        intent?.getStringExtra(PACKAGE_NAME),
+                        intent?.getStringExtra(PID)
+                    )
+                    applyStatus(true)
+                }
+            },
+            intentFilter
+        )
     }
 
     private fun applyData(
