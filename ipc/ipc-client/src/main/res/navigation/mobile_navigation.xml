@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_messenger"
-        android:name="dev.shtanko.ipc.client.MessengerFragment"
+        android:name="dev.shtanko.ipc.client.messenger.MessengerFragment"
         android:label="@string/title_messenger"
         tools:layout="@layout/fragment_messenger" />
 
     <fragment
         android:id="@+id/navigation_broadcast"
-        android:name="dev.shtanko.ipc.client.BroadcastFragment"
+        android:name="dev.shtanko.ipc.client.broadcast.BroadcastFragment"
         android:label="@string/title_broadcast"
         tools:layout="@layout/fragment_broadcast" />
 </navigation>

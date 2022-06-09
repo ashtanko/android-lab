@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package dev.shtanko.ipc.server
+package dev.shtanko.ipc.common
 
 // Bundle keys
 const val PID = "pid"
 const val CONNECTION_COUNT = "connection_count"
 const val PACKAGE_NAME = "package_name"
 const val DATA = "data"
+const val METHOD = "method"

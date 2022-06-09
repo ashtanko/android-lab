@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">AIDL Server</string>
-<!--    <string name="status_connected">Connected</string>-->
-<!--    <string name="status_disconnected">Disconnected</string>-->
+    <string name="status_connected">Connected</string>
+    <string name="status_disconnected">Disconnected</string>
 
     <string name="process_id_format">Process ID: %s</string>
     <string name="data_format">Data: %s</string>
     <string name="package_format">Package: %s</string>
     <string name="ipc_method_format">IPC method: %s</string>
+    <string name="is_connected_description">Is connected</string>
 
 </resources>

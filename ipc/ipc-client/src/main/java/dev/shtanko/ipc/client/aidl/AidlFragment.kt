@@ -23,7 +23,6 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import android.os.Process
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,9 +32,11 @@ import androidx.lifecycle.ViewModelProvider
 import dev.shtanko.ipc.client.R
 import dev.shtanko.ipc.client.databinding.FragmentAidlBinding
 import dev.shtanko.ipc.common.IPCMethod
+import dev.shtanko.ipc.common.applyFormattedString
 import dev.shtanko.ipc.common.applyNavigationIcon
 import dev.shtanko.ipc.common.goneUnless
 import dev.shtanko.ipc.server.IIPCExample
+import timber.log.Timber
 
 class AidlFragment : Fragment(), ServiceConnection {
 
@@ -92,25 +93,29 @@ class AidlFragment : Fragment(), ServiceConnection {
         )
         connected = true
 
-        binding.textViewProcessId.text =
-            String.format(getString(R.string.process_id_title), iRemoteService?.pid.toString())
+        binding.apply {
+            textViewProcessId.text = applyFormattedString(
+                R.string.process_id_title,
+                iRemoteService?.pid.toString()
+            )
 
-        binding.textViewConnectionsCount.text =
-            String.format(
-                getString(R.string.connection_count_title),
+            textViewConnectionsCount.text = applyFormattedString(
+                R.string.connection_count_title,
                 iRemoteService?.connectionCount.toString()
             )
 
-        binding.toolbar.applyNavigationIcon(connected)
-        binding.card.goneUnless(connected)
+            toolbar.applyNavigationIcon(connected)
+            card.goneUnless(connected)
+        }
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
         iRemoteService = null
         connected = false
-
-        binding.toolbar.applyNavigationIcon(null)
-        binding.card.goneUnless(connected)
+        binding.apply {
+            toolbar.applyNavigationIcon(null)
+            card.goneUnless(connected)
+        }
     }
 
     private fun connectToRemoteServer() {
@@ -121,7 +126,7 @@ class AidlFragment : Fragment(), ServiceConnection {
             val isBounded = requireActivity().applicationContext.bindService(
                 intent, this, Context.BIND_AUTO_CREATE
             )
-            Log.d("AIDL Fragment", "is bounded: $isBounded")
+            Timber.d("is service bound: $isBounded")
         }
     }
 }

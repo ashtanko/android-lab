@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-package dev.shtanko.ipc.client
+package dev.shtanko.ipc.common
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import dev.shtanko.ipc.client.databinding.FragmentMessengerBinding
+import android.app.Application
+import timber.log.Timber
 
-class MessengerFragment : Fragment() {
-    private lateinit var binding: FragmentMessengerBinding
+abstract class IPCApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        initTimber()
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMessengerBinding.inflate(inflater, container, false)
-        return binding.root
+    private fun initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }

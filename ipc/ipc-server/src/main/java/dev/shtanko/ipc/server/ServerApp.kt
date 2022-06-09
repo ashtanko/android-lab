@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package dev.shtanko.ipc.common
+package dev.shtanko.ipc.server
 
-enum class IPCMethod(val desc: String) {
-    AIDL_METHOD("aidl_method"),
-    MESSENGER_METHOD("messenger_method"),
-    BROADCAST_METHOD("broadcast_method"),
-    UNKNOWN("unknown")
-}
+import dev.shtanko.ipc.common.IPCApp
+
+class ServerApp : IPCApp()

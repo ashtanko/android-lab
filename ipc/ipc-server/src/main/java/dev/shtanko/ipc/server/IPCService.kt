@@ -27,7 +27,11 @@ import android.os.Process
 import android.text.TextUtils
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
+import dev.shtanko.ipc.common.CONNECTION_COUNT
+import dev.shtanko.ipc.common.DATA
 import dev.shtanko.ipc.common.IPCMethod
+import dev.shtanko.ipc.common.PACKAGE_NAME
+import dev.shtanko.ipc.common.PID
 
 class IPCService : LifecycleService() {
 

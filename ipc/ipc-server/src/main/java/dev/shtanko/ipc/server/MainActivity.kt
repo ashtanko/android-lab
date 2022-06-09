@@ -16,10 +16,21 @@
 
 package dev.shtanko.ipc.server
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import dev.shtanko.ipc.common.DATA
+import dev.shtanko.ipc.common.METHOD
+import dev.shtanko.ipc.common.PACKAGE_NAME
+import dev.shtanko.ipc.common.PID
 import dev.shtanko.ipc.common.applyFormattedString
+import dev.shtanko.ipc.server.IPCBroadcastReceiver.Companion.PASS_TO_ACTIVITY_ACTION
 import dev.shtanko.ipc.server.databinding.ActivityMainBinding
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -30,15 +41,55 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         IPCService.clientData.observe(this) {
-            binding.apply {
-                textViewData.text = applyFormattedString(R.string.data_format, it.clientData)
-                textViewIpcMethod.text =
-                    applyFormattedString(R.string.ipc_method_format, it.ipcMethod)
-                textViewPackage.text =
-                    applyFormattedString(R.string.package_format, it.clientPackageName)
-                textViewProcessId.text =
-                    applyFormattedString(R.string.process_id_format, it.clientProcessId)
+            applyData(it.clientData, it.ipcMethod, it.clientPackageName, it.clientProcessId)
+            applyStatus(true)
+        }
+
+        val intentFilter = IntentFilter().apply {
+            addAction(PASS_TO_ACTIVITY_ACTION)
+        }
+        registerReceiver(object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                Timber.d(
+                    "${intent?.getStringExtra(PACKAGE_NAME)} " +
+                        "${intent?.getStringExtra(PID)} " +
+                        "${intent?.getStringExtra(DATA)}" +
+                        "${intent?.getStringExtra(METHOD)}"
+                )
+                applyData(
+                    intent?.getStringExtra(DATA),
+                    intent?.getStringExtra(METHOD),
+                    intent?.getStringExtra(PACKAGE_NAME),
+                    intent?.getStringExtra(PID)
+                )
+                applyStatus(true)
             }
+        }, intentFilter)
+    }
+
+    private fun applyData(
+        data: String?,
+        method: String?,
+        packageName: String?,
+        processId: String?
+    ) = binding.apply {
+        card.visibility = View.VISIBLE
+        textViewData.text = applyFormattedString(R.string.data_format, data)
+        textViewIpcMethod.text =
+            applyFormattedString(R.string.ipc_method_format, method)
+        textViewPackage.text =
+            applyFormattedString(R.string.package_format, packageName)
+        textViewProcessId.text =
+            applyFormattedString(R.string.process_id_format, processId)
+    }
+
+    private fun applyStatus(isConnected: Boolean) = binding.apply {
+        if (isConnected) {
+            connectedTextView.text = getString(R.string.status_connected)
+            connectedImageView.setImageResource(R.drawable.ic_cloud_on_dark)
+        } else {
+            connectedTextView.text = getString(R.string.status_disconnected)
+            connectedImageView.setImageResource(R.drawable.ic_cloud_off_dark)
         }
     }
 }

@@ -16,22 +16,6 @@
 
 package dev.shtanko.ipc.client
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import dev.shtanko.ipc.client.databinding.FragmentBroadcastBinding
+import dev.shtanko.ipc.common.IPCApp
 
-class BroadcastFragment : Fragment() {
-    private lateinit var binding: FragmentBroadcastBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentBroadcastBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-}
+class ClientApp : IPCApp()

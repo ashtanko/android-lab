@@ -18,6 +18,10 @@ package dev.shtanko.ipc.common
 
 import android.app.Activity
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 
-fun Activity.applyFormattedString(@StringRes formatResId: Int, source: String): String =
-    String.format(getString(formatResId), source)
+fun Activity.applyFormattedString(@StringRes formatResId: Int, source: String?): String =
+    String.format(getString(formatResId), source ?: getString(R.string.no_data))
+
+fun Fragment.applyFormattedString(@StringRes formatResId: Int, source: String) =
+    requireActivity().applyFormattedString(formatResId, source)
