@@ -24,6 +24,7 @@ import dev.shtanko.ipc.common.IPCMethod
 import dev.shtanko.ipc.common.METHOD
 import dev.shtanko.ipc.common.PACKAGE_NAME
 import dev.shtanko.ipc.common.PID
+import dev.shtanko.ipc.common.THREAD_NAME
 
 class IPCBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -33,6 +34,7 @@ class IPCBroadcastReceiver : BroadcastReceiver() {
             putExtra(PID, intent?.getStringExtra(PID))
             putExtra(DATA, intent?.getStringExtra(DATA))
             putExtra(METHOD, IPCMethod.BROADCAST_METHOD.desc)
+            putExtra(THREAD_NAME, intent?.getStringExtra(THREAD_NAME))
         }
         context?.sendBroadcast(local)
     }

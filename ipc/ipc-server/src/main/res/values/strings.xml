@@ -7,6 +7,7 @@
     <string name="data_format">Data: %s</string>
     <string name="package_format">Package: %s</string>
     <string name="ipc_method_format">IPC method: %s</string>
+    <string name="thread_format">Thread: %s</string>
     <string name="is_connected_description">Is connected</string>
 
 </resources>

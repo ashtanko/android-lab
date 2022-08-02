@@ -24,7 +24,7 @@ val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
 
 subprojects {
     // filter directories w/o gradle config
-    if(buildDir.absolutePath.contains("ipc/build")) {
+    if (buildDir.absolutePath.contains("ipc/build") || buildDir.absolutePath.contains("processes/build")) {
         return@subprojects
     }
     val ktlint: Configuration by configurations.creating

@@ -29,6 +29,7 @@ import dev.shtanko.ipc.client.databinding.FragmentBroadcastBinding
 import dev.shtanko.ipc.common.DATA
 import dev.shtanko.ipc.common.PACKAGE_NAME
 import dev.shtanko.ipc.common.PID
+import dev.shtanko.ipc.common.THREAD_NAME
 import dev.shtanko.ipc.common.applyFormattedString
 import java.util.Calendar
 
@@ -56,6 +57,7 @@ class BroadcastFragment : Fragment() {
             putExtra(PACKAGE_NAME, requireContext().packageName)
             putExtra(PID, Process.myPid().toString())
             putExtra(DATA, binding.textInputData.text.toString())
+            putExtra(THREAD_NAME, Thread.currentThread().name)
             component =
                 ComponentName(COMPONENT_PACKAGE_NAME, BROADCAST_PATH)
         }

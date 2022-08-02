@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package dev.shtanko.ipc.server
+package dev.shtanko.dagger
 
-data class Data(
-    var clientPackageName: String,
-    var clientProcessId: String,
-    var clientData: String,
-    var ipcMethod: String,
-    var threadName: String,
-)
+import android.app.Application
+
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+    }
+}

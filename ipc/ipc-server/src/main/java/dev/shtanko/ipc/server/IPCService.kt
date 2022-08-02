@@ -32,12 +32,14 @@ import dev.shtanko.ipc.common.DATA
 import dev.shtanko.ipc.common.IPCMethod
 import dev.shtanko.ipc.common.PACKAGE_NAME
 import dev.shtanko.ipc.common.PID
+import dev.shtanko.ipc.common.THREAD_NAME
 
 class IPCService : LifecycleService() {
 
     companion object {
         var connectionCount: Int = 0
         const val NOT_SENT = "Not sent!"
+        const val MAIN_THREAD = "main"
         private const val IPC_METHOD_MESSENGER = "Messenger"
         private const val IPC_METHOD_AIDL = "AIDL"
         private const val IPC_METHOD_UNKNOWN = "unknown"
@@ -72,7 +74,8 @@ class IPCService : LifecycleService() {
                     receivedBundle.getString(PACKAGE_NAME) ?: NOT_SENT,
                     receivedBundle.getInt(PID).toString(),
                     receivedBundle.getString(DATA) ?: NOT_SENT,
-                    IPC_METHOD_MESSENGER
+                    IPC_METHOD_MESSENGER,
+                    receivedBundle.getString(THREAD_NAME) ?: MAIN_THREAD
                 )
             )
 
@@ -81,6 +84,7 @@ class IPCService : LifecycleService() {
 
             bundle.putInt(CONNECTION_COUNT, connectionCount)
             bundle.putInt(PID, Process.myPid())
+            bundle.putString(THREAD_NAME, Thread.currentThread().name)
             message.data = bundle
             msg.replyTo.send(message)
         }
@@ -91,7 +95,9 @@ class IPCService : LifecycleService() {
 
         override fun getConnectionCount() = IPCService.connectionCount
 
-        override fun setDisplayedValue(packageName: String?, pid: Int, data: String?) {
+        override fun threadName() = Thread.currentThread().name
+
+        override fun setDisplayedValue(packageName: String?, pid: Int, data: String?, threadName: String?) {
             val clientData =
                 if (data == null || TextUtils.isEmpty(data)) NOT_SENT
                 else data
@@ -100,7 +106,8 @@ class IPCService : LifecycleService() {
                     packageName ?: NOT_SENT,
                     pid.toString(),
                     clientData,
-                    IPC_METHOD_AIDL
+                    IPC_METHOD_AIDL,
+                    Thread.currentThread().name
                 )
             )
         }

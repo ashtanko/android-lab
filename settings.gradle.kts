@@ -24,4 +24,6 @@ include(
     "ipc:ipc-client",
     "ipc:ipc-server",
     "ipc:ipc-common",
+    "dagger",
+    //"processes:cpc",
 )

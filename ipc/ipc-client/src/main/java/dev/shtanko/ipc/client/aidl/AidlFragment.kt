@@ -36,6 +36,11 @@ import dev.shtanko.ipc.common.applyFormattedString
 import dev.shtanko.ipc.common.applyNavigationIcon
 import dev.shtanko.ipc.common.goneUnless
 import dev.shtanko.ipc.server.IIPCExample
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class AidlFragment : Fragment(), ServiceConnection {
@@ -67,7 +72,8 @@ class AidlFragment : Fragment(), ServiceConnection {
                     binding.textInputLayout.visibility = View.VISIBLE
                     false
                 } else {
-                    connectToRemoteServer()
+                    connectToRemoteServerConcurrent()
+                    //connectToRemoteServer()
                     binding.btnConnect.text = getString(R.string.disconnect)
                     binding.textInputLayout.visibility = View.GONE
                     true
@@ -89,7 +95,8 @@ class AidlFragment : Fragment(), ServiceConnection {
         iRemoteService?.setDisplayedValue(
             requireContext().packageName,
             Process.myPid(),
-            binding.textInputLayout.editText?.text.toString()
+            binding.textInputLayout.editText?.text.toString(),
+            Thread.currentThread().name
         )
         connected = true
 
@@ -103,8 +110,10 @@ class AidlFragment : Fragment(), ServiceConnection {
                 R.string.connection_count_title,
                 iRemoteService?.connectionCount.toString()
             )
-
-            toolbar.applyNavigationIcon(connected)
+            textViewThread.text= applyFormattedString(
+                R.string.thread_title,
+                iRemoteService?.threadName().toString()
+            )
             card.goneUnless(connected)
         }
     }
@@ -113,7 +122,6 @@ class AidlFragment : Fragment(), ServiceConnection {
         iRemoteService = null
         connected = false
         binding.apply {
-            toolbar.applyNavigationIcon(null)
             card.goneUnless(connected)
         }
     }
@@ -129,4 +137,9 @@ class AidlFragment : Fragment(), ServiceConnection {
             Timber.d("is service bound: $isBounded")
         }
     }
+
+    private fun connectToRemoteServerConcurrent() =
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+            connectToRemoteServer()
+        }
 }

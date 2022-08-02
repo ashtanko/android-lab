@@ -10,6 +10,7 @@
     <string name="send_data_hint">Send data to the server</string>
     <string name="process_id_title">Process ID: %s</string>
     <string name="connection_count_title">Connection count: %s</string>
+    <string name="thread_title">Thread: %s</string>
     <string name="broadcast_time_title">Broadcast sent: %s</string>
     <string name="broadcast_time_format">%d:%d:%d</string>
 </resources>

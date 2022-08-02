@@ -10,6 +10,8 @@ interface IIPCExample {
     /** Count of received connection requests from clients */
     int getConnectionCount();
 
+    String threadName();
+
     /** Set displayed value of screen */
-    void setDisplayedValue(String packageName, int pid, String data);
+    void setDisplayedValue(String packageName, int pid, String data, String threadName);
 }

@@ -40,6 +40,7 @@ import dev.shtanko.ipc.common.DATA
 import dev.shtanko.ipc.common.IPCMethod
 import dev.shtanko.ipc.common.PACKAGE_NAME
 import dev.shtanko.ipc.common.PID
+import dev.shtanko.ipc.common.THREAD_NAME
 import dev.shtanko.ipc.common.applyFormattedString
 import dev.shtanko.ipc.common.goneUnless
 import timber.log.Timber
@@ -133,7 +134,8 @@ class MessengerFragment : Fragment(), ServiceConnection {
         val bundle = bundleOf(
             DATA to binding.textInputData.text.toString(),
             PACKAGE_NAME to context?.packageName,
-            PID to Process.myPid()
+            PID to Process.myPid(),
+            THREAD_NAME to Thread.currentThread().name
         )
         message.data = bundle
         message.replyTo =

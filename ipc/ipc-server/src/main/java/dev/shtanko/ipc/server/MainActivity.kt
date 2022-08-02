@@ -27,6 +27,7 @@ import dev.shtanko.ipc.common.DATA
 import dev.shtanko.ipc.common.METHOD
 import dev.shtanko.ipc.common.PACKAGE_NAME
 import dev.shtanko.ipc.common.PID
+import dev.shtanko.ipc.common.THREAD_NAME
 import dev.shtanko.ipc.common.applyFormattedString
 import dev.shtanko.ipc.server.IPCBroadcastReceiver.Companion.PASS_TO_ACTIVITY_ACTION
 import dev.shtanko.ipc.server.databinding.ActivityMainBinding
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         IPCService.clientData.observe(this) {
-            applyData(it.clientData, it.ipcMethod, it.clientPackageName, it.clientProcessId)
+            applyData(it.clientData, it.ipcMethod, it.clientPackageName, it.clientProcessId, it.threadName)
             applyStatus(true)
         }
 
@@ -61,7 +62,8 @@ class MainActivity : AppCompatActivity() {
                         intent?.getStringExtra(DATA),
                         intent?.getStringExtra(METHOD),
                         intent?.getStringExtra(PACKAGE_NAME),
-                        intent?.getStringExtra(PID)
+                        intent?.getStringExtra(PID),
+                        intent?.getStringExtra(THREAD_NAME)
                     )
                     applyStatus(true)
                 }
@@ -74,7 +76,8 @@ class MainActivity : AppCompatActivity() {
         data: String?,
         method: String?,
         packageName: String?,
-        processId: String?
+        processId: String?,
+        threadName: String?
     ) = binding.apply {
         card.visibility = View.VISIBLE
         textViewData.text = applyFormattedString(R.string.data_format, data)
@@ -84,6 +87,8 @@ class MainActivity : AppCompatActivity() {
             applyFormattedString(R.string.package_format, packageName)
         textViewProcessId.text =
             applyFormattedString(R.string.process_id_format, processId)
+        textViewThread.text =
+            applyFormattedString(R.string.thread_format, threadName)
     }
 
     private fun applyStatus(isConnected: Boolean) = binding.apply {
